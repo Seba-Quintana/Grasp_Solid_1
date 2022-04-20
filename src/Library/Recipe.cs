@@ -43,19 +43,14 @@ namespace Full_GRASP_And_SOLID.Library
         public double GetProductionCost()
         {
             double sumaInsumos = 0;
-            double costoEquipamiento;
-            double sumaTiempoCosto = 0;
-            double sumaTiempoPasos = 0;
+            double costoEquipamiento = 0;
             double total = 0;
             foreach (Step step in this.steps)
             {
                 // el costo de los insumos es el precio del insumo por la cantidad necesaria
                 sumaInsumos = sumaInsumos + (step.Quantity * step.Input.UnitCost);
-                // para calcular el costo de equipamiento se necesitan el tiempo de uso, el costo, y la hora del equipo para todos los pasos de la receta. En este caso, solamente es posible conseguir un dato de tiempo, que se encuentra en step.time. Por ende, la cuenta a realizar sería step.time*(costo del equipamiento)/(la suma de todos los step.time del ArrayList)
-                sumaTiempoCosto = sumaTiempoCosto + (step.Equipment.HourlyCost * step.Time);
-                sumaTiempoPasos = sumaTiempoPasos + step.Time;
+                costoEquipamiento = costoEquipamiento + (step.Equipment.HourlyCost * step.Time);
             }
-            costoEquipamiento = sumaTiempoCosto / sumaTiempoPasos;
             total = sumaInsumos + costoEquipamiento;
             return total;
         }
